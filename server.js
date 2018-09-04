@@ -41,11 +41,18 @@ app.get('/', function(req, res) {
 	 res.render('index');
 })
 
+app.get('/quotes', function(req, res) {
+  //finds all documents in User collection.
+  var quotes = Quote.find({}, function(err, quotes) { 
+      console.log(quotes);   
+  })
+   res.render('quotes', {quotes: quotes});
+})
+
 app.post('/quote', function(req, res) {
 	console.log("POST DATA", req.body);
 	 //creates new user instance
 	 var quote = new Quote({name: req.body.name, quote: req.body.quote});
-
 	 quote.save(function(err){
         if(err){
             // if there is an error upon saving, use console.log to see what is in the err object 
@@ -64,12 +71,7 @@ app.post('/quote', function(req, res) {
     });
 })
 
-app.get('/quotes', function(req, res) {
-	//finds all documents in User collection.
-	Quote.find({}, function(err, users) {    
-  })
-	 res.render('quotes', {quotes: quotes});
-})
+
 
 //listen
 var server = app.listen(8000, function() {

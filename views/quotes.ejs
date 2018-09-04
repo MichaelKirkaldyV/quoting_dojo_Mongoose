@@ -6,10 +6,11 @@
 <body>
 	<h1>Quotes from Users</h1>
 
-        <% for(var i=0; i < quotes.length; i++){ %>
-    <h3><%= quotes[i].content %></h3>
-    <h5>---<%= quotes[i].name %> at <%= users[i].createdAt %></h5>
-    <hr>
-<%}%>
+        <ul>
+        <% for ( quote of quotes ) { %>
+          <li><%= quote.name %></li>
+          <li><%= quote.quote %></li>
+        <% } %>
+      </ul>
 </body>
 </html>
