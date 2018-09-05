@@ -6,11 +6,12 @@
 <body>
 	<h1>Quotes from Users</h1>
 
-        <ul>
-        <% for ( quote of quotes ) { %>
-          <li><%= quote.name %></li>
-          <li><%= quote.quote %></li>
+        
+        <% for ( const quote of quotes ) { %>
+         <p><strong><%= quote.name %></strong></p> 
+         <p><strong><%= quote.quote %></strong></p> 
+         <hr>
         <% } %>
-      </ul>
+      
 </body>
 </html>

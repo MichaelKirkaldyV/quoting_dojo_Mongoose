@@ -41,14 +41,6 @@ app.get('/', function(req, res) {
 	 res.render('index');
 })
 
-app.get('/quotes', function(req, res) {
-  //finds all documents in User collection.
-  var quotes = Quote.find({}, function(err, quotes) { 
-      console.log(quotes);   
-  })
-   res.render('quotes', {quotes: quotes});
-})
-
 app.post('/quote', function(req, res) {
 	console.log("POST DATA", req.body);
 	 //creates new user instance
@@ -69,6 +61,15 @@ app.post('/quote', function(req, res) {
             res.redirect('/quotes');
         }
     });
+
+app.get('/quotes', function(req, res) {
+  //finds all documents in User collection.
+ Quote.find({}, function(err, quotes) { 
+      console.log(quotes);   
+  })
+   res.render('quotes', {quotes: quotes});
+})
+
 })
 
 
