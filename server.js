@@ -61,15 +61,14 @@ app.post('/quote', function(req, res) {
             res.redirect('/quotes');
         }
     });
+})
 
 app.get('/quotes', function(req, res) {
   //finds all documents in User collection.
- Quote.find({}, function(err, quotes) { 
-      console.log(quotes);   
+  var quotes = Quote.find({}, function(err, quotes) { 
+      console.log(quotes); 
+      res.render('quotes', {quotes: quotes});  
   })
-   res.render('quotes', {quotes: quotes});
-})
-
 })
 
 

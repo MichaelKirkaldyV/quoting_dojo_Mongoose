@@ -5,13 +5,11 @@
 </head>
 <body>
 	<h1>Quotes from Users</h1>
-
-        
-        <% for ( const quote of quotes ) { %>
-         <p><strong><%= quote.name %></strong></p> 
-         <p><strong><%= quote.quote %></strong></p> 
-         <hr>
-        <% } %>
+	<% for (var i = 0; i < quotes.length; i++) { %>
+		<p><strong><%= quotes[i].name %></strong></p>
+		<p><%= quotes[i].quote %></p>
+		<hr>
+		<% } %>
       
 </body>
 </html>
