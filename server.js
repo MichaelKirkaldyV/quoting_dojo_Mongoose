@@ -21,56 +21,12 @@ app.use(flash());
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
-//Connect
-//connecting database defined in terminal.
-mongoose.connect('mongodb://localhost/quote');
+require('./server/config/mongoose.js');
 
-//Schema
-var QuoteSchema = new mongoose.Schema({
- //validations
- name:  { type: String, required: true, minlength: 6},
- quote: { type: String, required: true, maxlength: 100 }
-}, {timestamps: true});
-
-//Model
-mongoose.model('Quote', QuoteSchema); // We are setting this Schema in our Models as 'User'
-var Quote = mongoose.model('Quote') // We are retrieving this Schema from our Models, named 'User'
-
-//Routing
-app.get('/', function(req, res) {
-	 res.render('index');
-})
-
-app.post('/quote', function(req, res) {
-	console.log("POST DATA", req.body);
-	 //creates new user instance
-	 var quote = new Quote({name: req.body.name, quote: req.body.quote});
-	 quote.save(function(err){
-        if(err){
-            // if there is an error upon saving, use console.log to see what is in the err object 
-            console.log("We have an error!", err);
-            // adjust the code below as needed to create a flash message with the tag and content you would like
-            for(var key in err.errors){
-                req.flash('registration', err.errors[key].message);
-            }
-            // redirect the user to an appropriate route
-            res.redirect('/');
-        }
-        else {
-        	console.log('successfully added a user!');
-            res.redirect('/quotes');
-        }
-    });
-})
-
-app.get('/quotes', function(req, res) {
-  //finds all documents in User collection.
-  var quotes = Quote.find({}, function(err, quotes) { 
-      console.log(quotes); 
-      res.render('quotes', {quotes: quotes});  
-  })
-})
-
+// where the routes used to be, we're going to require routes.js
+// since routes.js exports a function, server.js will receive that function
+// invoke the function we get from the require and pass it app as an argument
+require('./server/config/routes.js')(app)
 
 
 //listen
